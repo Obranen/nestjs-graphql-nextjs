@@ -12,19 +12,33 @@ const getAllProducts = gql`
   }
 `
 
+interface Product {
+  id: string
+  name: string
+  price: number
+}
+
+interface ProductsData {
+  products: Product[]
+}
+
 export default async function Home() {
   // Выполняем запрос прямо на сервере!
-  const { data } = await getClient().query({ query: getAllProducts })
+  const { data } = await getClient().query<ProductsData>({
+    query: getAllProducts,
+  })
 
   return (
     <main className='p-10'>
-      <h1 className='text-2xl font-bold mb-4'>Пользователи из БД:</h1>
-      data.products.map((product) => (
-        <div key={product.id}>
-          <p>{product.name}</p>
-          <p>{product.price}</p>
-        </div>
-      ))
+      <h1 className='text-2xl font-bold mb-4'>Товары из БД:</h1>
+      <>
+        {data?.products?.map((product: Product) => (
+          <div key={product.id}>
+            <p>{product.name}</p>
+            <p>{product.price}</p>
+          </div>
+        ))}
+      </>
     </main>
   )
 }
