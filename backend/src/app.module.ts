@@ -5,8 +5,8 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { join } from 'path'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { PrismaModule } from './prisma/prisma.module'
 import { ProductsModule } from './products/products.module'
-import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -15,6 +15,7 @@ import { PrismaModule } from './prisma/prisma.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: true,
     }),
+    PrismaModule,
     ProductsModule,
     ConfigModule.forRoot({
       isGlobal: true, // Делает переменные доступными во всем приложении
