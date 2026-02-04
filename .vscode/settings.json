@@ -11,5 +11,6 @@
       "database": "strapi",
       "name": "MyDBTest"
     }
-  ]
+  ],
+  "postman.settings.dotenv-detection-notification-visibility": false
 }
