@@ -1,15 +1,18 @@
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
+import { ApolloDriver } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
-import { PrismaModule } from './prisma/prisma.module'
+import { AuthModule } from './auth/auth.module'
 import { getGraphQLConfig } from './config/graphql.config'
+import { PrismaModule } from './prisma/prisma.module'
 
 @Module({
   imports: [
-    GraphQLModule.forRootAsync<ApolloDriverConfig>({
+    GraphQLModule.forRootAsync({
       driver: ApolloDriver,
+      imports: [ConfigModule],
       useFactory: getGraphQLConfig,
+      inject: [ConfigService],
     }),
     PrismaModule,
     ConfigModule.forRoot({
@@ -17,6 +20,7 @@ import { getGraphQLConfig } from './config/graphql.config'
       expandVariables: true, // ВКЛЮЧАЕТ dotenv-expand
     }),
     PrismaModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

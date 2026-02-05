@@ -1,10 +1,13 @@
-import { ApolloDriver } from '@nestjs/apollo'
-import { GqlModuleOptions } from '@nestjs/graphql'
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
+import { ConfigService } from '@nestjs/config'
+import { join } from 'path'
+import { isDev } from 'src/utils/is-dev.util'
 
-export async function getGraphQLConfig(): Promise<GqlModuleOptions> {
+export async function getGraphQLConfig(): Promise<ApolloDriverConfig> {
   return {
     driver: ApolloDriver,
-    autoSchemaFile: true,
+    autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     sortSchema: true,
+    playground: isDev(ConfigService),
   }
 }
