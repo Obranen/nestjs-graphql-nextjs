@@ -2,28 +2,21 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
-import { join } from 'path'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
 import { PrismaModule } from './prisma/prisma.module'
-import { ProductsModule } from './products/products.module'
+import { getGraphQLConfig } from './config/graphql.config'
 
 @Module({
   imports: [
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      playground: true,
+      useFactory: getGraphQLConfig,
     }),
     PrismaModule,
-    ProductsModule,
     ConfigModule.forRoot({
       isGlobal: true, // Делает переменные доступными во всем приложении
       expandVariables: true, // ВКЛЮЧАЕТ dotenv-expand
     }),
     PrismaModule,
   ],
-  controllers: [AppController],
-  providers: [AppService], // <-- Добавь сюда
 })
 export class AppModule {}
