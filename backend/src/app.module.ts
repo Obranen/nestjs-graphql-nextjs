@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { AuthModule } from './auth/auth.module'
 import { getGraphQLConfig } from './config/graphql.config'
 import { PrismaModule } from './prisma/prisma.module'
+import { UsersModule } from './users/users.module'
 
 @Module({
   imports: [
@@ -19,8 +20,8 @@ import { PrismaModule } from './prisma/prisma.module'
       isGlobal: true, // Делает переменные доступными во всем приложении
       expandVariables: true, // ВКЛЮЧАЕТ dotenv-expand
     }),
-    PrismaModule,
     AuthModule,
+    UsersModule,
   ],
 })
 export class AppModule {}
