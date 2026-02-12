@@ -4,27 +4,27 @@ import { gql } from '@apollo/client'
 // Описываем, что мы хотим забрать
 const getAllProducts = gql`
   query {
-    products {
+    users {
       id
       name
-      price
+      email
     }
   }
 `
 
-interface Product {
+interface User {
   id: string
   name: string
-  price: number
+  email: string
 }
 
-interface ProductsData {
-  products: Product[]
+interface UsersData {
+  users: User[]
 }
 
 export default async function Home() {
   // Выполняем запрос прямо на сервере!
-  const { data } = await getClient().query<ProductsData>({
+  const { data } = await getClient().query<UsersData>({
     query: getAllProducts,
   })
 
@@ -32,10 +32,10 @@ export default async function Home() {
     <main className='p-10'>
       <h1 className='text-2xl font-bold mb-4'>Товары из БД:</h1>
       <>
-        {data?.products?.map((product: Product) => (
-          <div key={product.id}>
-            <p>{product.name}</p>
-            <p>{product.price}</p>
+        {data?.users?.map((user: User) => (
+          <div key={user.id}>
+            <p>{user.name}</p>
+            <p>{user.email}</p>
           </div>
         ))}
       </>
