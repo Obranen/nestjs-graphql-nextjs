@@ -10,6 +10,9 @@
 !.yarn/releases
 !.yarn/versions
 
+#codegen
+/lib/__generated__
+
 # testing
 /coverage
 
