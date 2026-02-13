@@ -8,5 +8,6 @@ export function getGraphQLConfig(): Promise<ApolloDriverConfig> {
     autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     sortSchema: true,
     playground: isDev,
+    csrfPrevention: false,
   })
 }

@@ -1,6 +1,7 @@
-import { graphql } from '@/lib/__generated__/gql'
+// import gql from 'graphql-tag'
+import { gql } from 'graphql-tag'
 
-export const GET_ALL_USERS = graphql(`
+export const GET_ALL_USERS = gql`
   query GetAllUsers {
     users {
       id
@@ -8,4 +9,4 @@ export const GET_ALL_USERS = graphql(`
       email
     }
   }
-`)
+`

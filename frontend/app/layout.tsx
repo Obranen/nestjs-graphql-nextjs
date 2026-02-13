@@ -33,24 +33,26 @@
 //   );
 // }
 
-// app/layout.tsx
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { useState } from 'react'
-import "./globals.css";
+import './globals.css'
+import Providers from '@/lib/providers'
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Создаем клиент внутри useState, чтобы он не пересоздавался при ререндерах
-  const [queryClient] = useState(() => new QueryClient())
+export const metadata = {
+  title: 'My App',
+  description: 'NestJS + Next.js + GraphQL',
+}
 
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="ru" suppressHydrationWarning>
       <body>
-        <QueryClientProvider client={queryClient}>
+        {/* Оборачиваем всё приложение в наш клиентский провайдер */}
+        <Providers>
           {children}
-          {/* Иконка TanStack DevTools */}
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
+        </Providers>
       </body>
     </html>
   )
