@@ -6,7 +6,7 @@ export default function Home() {
   const { data, isLoading, error } = useGetAllUsersQuery();
 
   if (isLoading) return <div className="p-10">Загрузка...</div>;
-  if (error) return <div className="p-10 text-red-500">Ошибка: {error.message}</div>;
+  if (error) return <div className="p-10 text-red-500">Ошибка: {(error as Error).message}</div>;
 
   return (
     <main className="p-10">
