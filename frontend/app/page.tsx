@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { UserForm } from '@/components/UserForm'
 import { useGetAllUsersQuery } from '@/lib/__generated__/graphql'
 
 export default function Home() {
@@ -37,7 +37,7 @@ export default function Home() {
           </li>
         ))}
       </ul>
-      <Button variant='default'>Новый пользователь</Button>
+      <UserForm />
     </main>
   )
 }
