@@ -13,7 +13,7 @@
     "codegen:watch": "cd frontend && pnpm codegen:watch",
     "dev:backend": "cd backend && pnpm run start:dev",
     "dev:frontend": "cd frontend && pnpm run dev",
-    "dev": "pnpm db:up && concurrently --prefix \"[{name}]\" --names \"BACKEND,FRONTEND\" --prefix-colors \"yellow,cyan\" \"pnpm dev:backend\" \"wait-on -t 30000 127.0.0.1:4000 && pnpm dev:frontend\"",
+    "dev": "pnpm db:up && concurrently --prefix \"[{name}]\" --names \"BACKEND,FRONTEND\" --prefix-colors \"yellow,cyan\" \"pnpm dev:backend\" \"wait-on -t 30000 tcp:127.0.0.1:4000 && pnpm dev:frontend\"",
     "dev:full": "pnpm db:up && pnpm db:migrate && pnpm codegen && concurrently --prefix \"[{name}]\" --names \"BACKEND,FRONTEND\" --prefix-colors \"yellow,cyan\" \"pnpm dev:backend\" \"wait-on -t 30000 127.0.0.1:4000 && pnpm dev:frontend\""
   },
   "keywords": [],
