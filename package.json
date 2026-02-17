@@ -7,12 +7,21 @@
     "db:up": "docker compose up -d",
     "db:stop": "docker compose stop",
     "db:down": "docker compose down",
+    "db:migrate": "cd backend && pnpm prisma migrate dev",
+    "db:generate": "cd backend && pnpm prisma generate",
+    "codegen": "cd frontend && pnpm codegen",
+    "codegen:watch": "cd frontend && pnpm codegen:watch",
     "dev:backend": "cd backend && pnpm run start:dev",
     "dev:frontend": "cd frontend && pnpm run dev",
-    "dev": "pnpm db:up && pnpm dev:backend"
+    "dev": "pnpm db:up && concurrently --prefix \"[{name}]\" --names \"BACKEND,FRONTEND\" --prefix-colors \"yellow,cyan\" \"pnpm dev:backend\" \"wait-on -t 30000 127.0.0.1:4000 && pnpm dev:frontend\"",
+    "dev:full": "pnpm db:up && pnpm db:migrate && pnpm codegen && concurrently --prefix \"[{name}]\" --names \"BACKEND,FRONTEND\" --prefix-colors \"yellow,cyan\" \"pnpm dev:backend\" \"wait-on -t 30000 127.0.0.1:4000 && pnpm dev:frontend\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.29.2"
+  "packageManager": "pnpm@10.29.2",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "wait-on": "^9.0.4"
+  }
 }

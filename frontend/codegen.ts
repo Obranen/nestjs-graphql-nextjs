@@ -2,7 +2,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: 'http://localhost:3000/graphql',
+  schema: 'http://localhost:4000/graphql',
   documents: ['./app/**/*.tsx', './app/**/*.ts'],
   generates: {
     './lib/__generated__/graphql.ts': {
@@ -14,7 +14,7 @@ const config: CodegenConfig = {
       config: {
         reactQueryVersion: 5,
         fetcher: {
-          endpoint: 'http://localhost:3000/graphql',
+          endpoint: 'http://localhost:4000/graphql',
           fetchParams: {
             headers: {
               'Content-Type': 'application/json',
