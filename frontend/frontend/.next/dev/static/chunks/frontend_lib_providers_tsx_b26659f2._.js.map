@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///home/dimaubuntu/dev-project/nestjs-graphql-nextjs/frontend/lib/providers.tsx"],"sourcesContent":["'use client'\n\nimport { QueryClient, QueryClientProvider } from '@tanstack/react-query'\nimport { ReactQueryDevtools } from '@tanstack/react-query-devtools'\nimport { useState } from 'react'\n\nexport default function Providers({ children }: { children: React.ReactNode }) {\n  // Создаем QueryClient внутри useState, чтобы он не сбрасывался при ререндерах\n  const [queryClient] = useState(() => new QueryClient({\n    defaultOptions: {\n      queries: {\n        // Настройки по умолчанию, например:\n        staleTime: 60 * 1000, \n      },\n    },\n  }))\n\n  return (\n    <QueryClientProvider client={queryClient}>\n      {children}\n      <ReactQueryDevtools initialIsOpen={false} />\n    </QueryClientProvider>\n  )\n}"],"names":[],"mappings":";;;;;AAEA;AAAA;AACA;AACA;;;AAJA;;;;AAMe,SAAS,UAAU,EAAE,QAAQ,EAAiC;;IAC3E,8EAA8E;IAC9E,MAAM,CAAC,YAAY,GAAG,IAAA,0YAAQ;8BAAC,IAAM,IAAI,qRAAW,CAAC;gBACnD,gBAAgB;oBACd,SAAS;wBACP,oCAAoC;wBACpC,WAAW,KAAK;oBAClB;gBACF;YACF;;IAEA,qBACE,8ZAAC,6TAAmB;QAAC,QAAQ;;YAC1B;0BACD,8ZAAC,+YAAkB;gBAAC,eAAe;;;;;;;;;;;;AAGzC;GAjBwB;KAAA"}}]
+}

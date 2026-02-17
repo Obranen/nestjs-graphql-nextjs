@@ -15,8 +15,13 @@ export class PrismaService
   private pool: Pool
 
   constructor() {
+    const databaseUrl = process.env.DATABASE_URL
+    if (!databaseUrl) {
+      throw new Error('DATABASE_URL environment variable is not defined')
+    }
+    console.log('DATABASE_URL:', databaseUrl)
     const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: databaseUrl,
     })
     const adapter = new PrismaPg(pool)
     super({ adapter })

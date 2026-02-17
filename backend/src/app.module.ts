@@ -17,9 +17,9 @@ import { UsersModule } from './users/users.module'
     }),
     PrismaModule,
     ConfigModule.forRoot({
-      isGlobal: true, // Делает переменные доступными во всем приложении
-      expandVariables: true, // ВКЛЮЧАЕТ dotenv-expand
-      envFilePath: '../.env', // Путь к файлу .env
+      isGlobal: true,
+      expandVariables: true,
+      envFilePath: process.cwd() + '/.env',
     }),
     AuthModule,
     UsersModule,
