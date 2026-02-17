@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:16-alpine # Легкая и актуальная версия
+    container_name: nest_postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      # Это магия: данные сохраняются в папку .docker_data в проекте
+      - ./.docker_data/db:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: nest_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    ports:
+      - "5050:80" # Заходи на http://localhost:5050
+    depends_on:
+      - db
