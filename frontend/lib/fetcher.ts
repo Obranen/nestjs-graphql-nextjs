@@ -2,7 +2,7 @@ import { GraphQLClient } from 'graphql-request';
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import { print } from 'graphql';
 
-const endpoint = 'http://localhost:3000/graphql';
+const endpoint = 'http://localhost:4000/graphql';
 
 export const customFetcher = <TData, TVariables>(
   query: DocumentNode<TData, TVariables> | string,
