@@ -1,0 +1,26 @@
+/* light */
+:root {
+    /* color */
+  --color-primary: #1b5a96;
+  --text-primary: 1rem;
+  --font-primary: 'Roboto';
+}
+
+
+/* dark */
+:root[data-theme='dark'] {
+    /* color */
+  --color-primary: #0d9806;
+  --text-primary: 1.25rem;
+  --font-primary: 'Georgia';
+}
+
+
+@theme {
+  --color-primary: var(--color-primary);
+  --text-primary: var(--text-primary);
+  --font-primary: var(--font-primary);
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+  --breakpoint-3xl: 120rem;
+}

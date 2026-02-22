@@ -1,0 +1,24 @@
+/* light */
+:root {
+  /* Mode 1 */
+  /* color */
+  --color-primary: #1b5a96;
+  --text-primary: 1rem;
+  --font-primary: 'Roboto';
+}
+/* dark */
+:root {
+  /* Mode 1 */
+  /* color */
+  --color-primary: #0d9806;
+  --text-primary: 1.25rem;
+  --font-primary: 'Georgia';
+}
+/* breakpoint */
+:root {
+  /* Mode 1 */
+  /* number */
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+  --breakpoint-3xl: 120rem;
+}

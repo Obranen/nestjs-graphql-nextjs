@@ -192,6 +192,7 @@ cd frontend
 pnpm dev              # Запуск dev-сервера (http://localhost:3000)
 pnpm codegen          # Генерація GraphQL типів
 pnpm codegen:watch    # Генерація в режимі спостереження
+pnpm fix              # Генерація Tailwind CSS змінних з токенів Figma
 
 # Production
 pnpm build            # Збірка для production

@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <main className='p-10'>
-      <h1 className='text-2xl font-bold mb-4'>Список пользователей</h1>
+      <h1 className='text-2xl font-bold mb-4 font-primary text-primary'>Список пользователей</h1>
       <ul className='space-y-2'>
         {users.map((user) => (
           <li key={user.id} className='p-4 border rounded shadow-sm'>

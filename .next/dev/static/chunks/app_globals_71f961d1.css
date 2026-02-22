@@ -52,6 +52,9 @@
     --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     --default-font-family: var(--font-geist-sans);
     --default-mono-font-family: var(--font-geist-mono);
+    --color-primary: var(--primary);
+    --text-primary: var(--text-primary);
+    --font-primary: var(--font-primary);
   }
 
   @supports (color: lab(0% 0 0)) {
@@ -591,6 +594,10 @@
     padding-left: calc(var(--spacing) * 4);
   }
 
+  .font-primary {
+    font-family: var(--font-primary);
+  }
+
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -1001,6 +1008,18 @@
     width: calc(var(--spacing) * 4);
     height: calc(var(--spacing) * 4);
   }
+}
+
+:root {
+  --color-primary: #1b5a96;
+  --text-primary: 1rem;
+  --font-primary: "Roboto";
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #0d9806;
+  --text-primary: 1.25rem;
+  --font-primary: "Georgia";
 }
 
 :root {

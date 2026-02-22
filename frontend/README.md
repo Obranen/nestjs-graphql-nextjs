@@ -50,6 +50,23 @@ Frontend буде доступний за адресою: **http://localhost:300
 | `pnpm start` | Запуск production-сервера |
 | `pnpm codegen` | Генерація GraphQL типів та React Query хуків |
 | `pnpm codegen:watch` | Генерація в режимі спостереження |
+| `pnpm fix` | Генерація Tailwind CSS змінних з токенів Figma |
+
+### Генерація Tailwind CSS змінних (fix)
+
+Команда `pnpm fix` генерує змінні для Tailwind CSS з токенів Figma:
+
+```bash
+pnpm fix
+```
+
+**Вимоги:**
+- Наявність файлу `variables/variables.css` з CSS змінними з Figma
+
+**Результат:**
+- `variables/build/tailwind-variables.css` - згенеровані змінні для Tailwind
+- `variables/build/tailwind-variables-figma-code.css` - змінні з Figma code format
+
 
 ## Структура проекту
 
