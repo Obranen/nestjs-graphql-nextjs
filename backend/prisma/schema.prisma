@@ -8,11 +8,40 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(ulid())
-  email     String   @unique
+  id        String    @id @default(ulid())
+  email     String    @unique
   name      String
   bio       String?
-  role      String   @default("USER")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  role      String    @default("USER")
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Product {
+  id          String   @id @default(ulid())
+  name        String
+  description String?
+  slug        String   @unique
+  sku         String   @unique
+  price       Decimal  @db.Decimal(10, 2)
+  currency    String   @default("USD")
+  stock       Int      @default(0)
+  category    String?
+  tags        String[]
+  images      String[]
+  weight      Float?
+  dimensions  Json?    // { length, width, height }
+  status      String   @default("DRAFT") // DRAFT, ACTIVE, ARCHIVED
+  isFeatured  Boolean  @default(false)
+  rating      Float    @default(0)
+  reviewCount Int      @default(0)
+  vendorId    String?
+  vendor      User?    @relation(fields: [vendorId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([status])
+  @@index([vendorId])
 }

@@ -2,6 +2,26 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateProductInput {
+  category: String
+  currency: String
+  description: String
+  dimensions: String
+  images: [String!]
+  isFeatured: Boolean
+  name: String!
+  price: Float!
+  rating: Float
+  reviewCount: Float
+  sku: String!
+  slug: String!
+  status: String
+  stock: Float
+  tags: [String!]
+  vendorId: String
+  weight: Float
+}
+
 input CreateUserInput {
   bio: String
   email: String!
@@ -15,14 +35,67 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Mutation {
+  createProduct(input: CreateProductInput!): Product!
   createUser(input: CreateUserInput!): User!
+  deleteProduct(id: ID!): Product!
   deleteUser(id: ID!): User!
+  updateProduct(id: ID!, input: UpdateProductInput!): Product!
   updateUser(id: ID!, input: UpdateUserInput!): User!
 }
 
+type Product {
+  category: String
+  createdAt: DateTime!
+  currency: String!
+  description: String
+  dimensions: String
+  id: ID!
+  images: [String!]!
+  isFeatured: Boolean!
+  name: String!
+  price: Float!
+  rating: Float!
+  reviewCount: Int!
+  sku: String!
+  slug: String!
+  status: String!
+  stock: Int!
+  tags: [String!]!
+  updatedAt: DateTime!
+  vendor: String
+  vendorId: String
+  weight: Float
+}
+
 type Query {
+  featuredProducts: [Product!]!
+  product(id: ID!): Product
+  productBySlug(slug: String!): Product
+  products: [Product!]!
+  productsByCategory(category: String!): [Product!]!
   user(id: ID!): User
   users: [User!]!
+}
+
+input UpdateProductInput {
+  category: String
+  currency: String
+  description: String
+  dimensions: String
+  id: String!
+  images: [String!]
+  isFeatured: Boolean
+  name: String
+  price: Float
+  rating: Float
+  reviewCount: Float
+  sku: String
+  slug: String
+  status: String
+  stock: Float
+  tags: [String!]
+  vendorId: String
+  weight: Float
 }
 
 input UpdateUserInput {
