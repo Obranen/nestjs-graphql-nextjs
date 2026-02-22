@@ -6,6 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "db:up": "docker compose up -d",
+    "db:stop": "docker compose stop",
+    "db:down": "docker compose down",
     "build": "nest build",
     "start": "nest start",
     "start:dev": "nest start --watch",

@@ -18,31 +18,59 @@ pnpm install
 
 ## Налаштування бази даних
 
-1. Створіть файл `.env` у корені проекту (або відредагуйте існуючий):
+### 1. Запуск БД через Docker
 
-```env
-DATABASE_URL=postgresql://user:password@localhost:5432/dbname?schema=public
+```bash
+pnpm db:up
 ```
 
-2. Згенеруйте Prisma Client:
+Це запустить PostgreSQL та pgAdmin:
+- **PostgreSQL**: `localhost:5432`
+- **pgAdmin**: `http://localhost:5050`
+
+### 2. Налаштування змінних оточення
+
+Створіть файл `.env` у директорії `backend/`:
+
+```env
+POSTGRES_USER=ubuntu_postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=strapi
+DATABASE_URL=postgresql://ubuntu_postgres:postgres@localhost:5432/strapi?schema=public
+
+PGADMIN_EMAIL=admin@example.com
+PGADMIN_PASSWORD=admin
+```
+
+### 3. Згенеруйте Prisma Client:
 
 ```bash
 pnpm prisma:generate
 ```
 
-3. Створіть та застосуйте міграції:
+### 4. Створіть та застосуйте міграції:
 
 ```bash
 pnpm prisma:migrate
 ```
 
-4. Заповніть БД тестовими даними:
+### 5. Заповніть БД тестовими даними:
 
 ```bash
 pnpm db:seed
 ```
 
 ## Скрипти
+
+### Робота з Docker
+
+| Команда | Опис |
+|---------|------|
+| `pnpm db:up` | Запуск PostgreSQL та pgAdmin у Docker |
+| `pnpm db:stop` | Зупинка Docker-контейнерів |
+| `pnpm db:down` | Зупинка та видалення контейнерів |
 
 ### Розробка
 
@@ -72,9 +100,9 @@ pnpm db:seed
 
 ## GraphQL API
 
-Після запуску сервера GraphQL доступний за адресою:
+Після запуску сервера (`pnpm start:dev`) GraphQL доступний за адресою:
 
-- **GraphQL Endpoint**: `http://localhost:4000/graphql`
+- **GraphQL Endpoint**: `http://localhost:3000/graphql`
 - **Playground**: відкривається автоматично в браузері
 
 ### Основні запити

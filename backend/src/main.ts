@@ -1,9 +1,9 @@
 import dotenv from 'dotenv'
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
 
-// Load .env from project root (parent of backend directory)
-const envPath = path.resolve(process.cwd(), '../.env')
+// Load .env from backend directory
+const envPath = path.resolve(process.cwd(), '.env')
 console.log('Loading .env from:', envPath)
 console.log('File exists:', fs.existsSync(envPath))
 
@@ -19,6 +19,6 @@ async function bootstrap() {
   app.enableCors()
   app.enableShutdownHooks()
   app.useGlobalPipes(new ValidationPipe())
-  await app.listen(process.env.PORT ?? 4000)
+  await app.listen(process.env.PORT ?? 3000)
 }
 bootstrap()
