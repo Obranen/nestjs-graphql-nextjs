@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js GraphQL Frontend
 
-## Getting Started
+Frontend на Next.js з GraphQL API, TanStack Query та TypeScript.
 
-First, run the development server:
+## Стек технологій
+
+- **Next.js 16** — React фреймворк з App Router
+- **GraphQL** — API комунікація з backend
+- **TanStack Query v5** — управління серверним станом
+- **TypeScript** — типізація
+- **Tailwind CSS v4** — стилізація
+- **shadcn/ui** — UI компоненти
+
+## Встановлення
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Запуск
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Генерація GraphQL типів
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Перед запуском frontend переконайтеся, що backend запущено на `http://localhost:4000/graphql`, та згенеруйте типи:
 
-## Learn More
+```bash
+pnpm codegen
+```
 
-To learn more about Next.js, take a look at the following resources:
+Або в режимі спостереження (автоматичне оновлення при зміні запитів):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm codegen:watch
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 2. Запуск dev-сервера
 
-## Deploy on Vercel
+```bash
+pnpm dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Frontend буде доступний за адресою: **http://localhost:3000**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Скрипти
+
+| Команда | Опис |
+|---------|------|
+| `pnpm dev` | Запуск dev-сервера з авто-оновленням |
+| `pnpm build` | Збірка для production |
+| `pnpm start` | Запуск production-сервера |
+| `pnpm codegen` | Генерація GraphQL типів та React Query хуків |
+| `pnpm codegen:watch` | Генерація в режимі спостереження |
+
+## Структура проекту
+
+```
+frontend/
+├── app/                    # Next.js App Router
+│   ├── globals.css         # Глобальні стилі
+│   ├── layout.tsx          # Кореневий layout
+│   ├── page.tsx            # Головна сторінка
+│   └── product/            # Продукти
+├── components/             # React компоненти
+├── lib/
+│   ├── __generated__/      # Автозгенеровані GraphQL типи (не комітити)
+│   ├── fetcher.ts          # GraphQL fetcher
+│   └── providers.tsx       # Postgres providers (QueryClient)
+├── codegen.ts              # GraphQL Codegen конфігурація
+└── package.json
+```
+
+## GraphQL Codegen
+
+Codegen автоматично генерує:
+- TypeScript типи для GraphQL операцій
+- React Query хуки для запитів та мутацій
+- Типізовані функції fetcher
+
+Приклад використання згенерованого хуку:
+
+```tsx
+import { useGetAllUsersQuery } from '@/lib/__generated__/graphql'
+
+function MyComponent() {
+  const { data, isLoading, error } = useGetAllUsersQuery()
+  
+  if (isLoading) return <div>Загрузка...</div>
+  if (error) return <div>Помилка: {error.message}</div>
+  
+  return <div>{data?.users.map(u => <div key={u.id}>{u.name}</div>)}</div>
+}
+```
+
+## Залежності від Backend
+
+Для роботи frontend необхідний запущений backend:
+
+```bash
+# У терміналі 1 - запустити backend
+cd ../backend
+pnpm start:dev
+```
+
+Backend має бути доступний за адресою: **http://localhost:4000/graphql**
+
+## Вирішення проблем
+
+### Помилка генерації GraphQL типів
+
+Якщо `pnpm codegen` видає помилку:
+1. Переконайтеся, що backend запущено
+2. Перевірте, що GraphQL доступний за адресою `http://localhost:4000/graphql`
+3. Запустіть `pnpm codegen` ще раз
+
+### Помилка Tailwind CSS
+
+Якщо стилі не застосовуються:
+1. Видаліть `.next` папку: `rm -rf .next`
+2. Перезапустіть dev-сервер: `pnpm dev`
+
+## Ліцензія
+
+MIT
