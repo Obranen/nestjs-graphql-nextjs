@@ -1,11 +1,10 @@
 import { GraphQLClient } from 'graphql-request';
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
-import { print } from 'graphql';
+import { print, DocumentNode } from 'graphql';
 
 const endpoint = 'http://localhost:4000/graphql';
 
 export const customFetcher = <TData, TVariables>(
-  query: DocumentNode<TData, TVariables> | string,
+  query: DocumentNode | string,
   variables?: TVariables
 ) => {
   return async (): Promise<TData> => {
@@ -17,7 +16,7 @@ export const customFetcher = <TData, TVariables>(
 
     // Если query это DocumentNode, преобразуем в строку
     const queryString = typeof query === 'string' ? query : print(query);
-    
+
     return await client.request<TData>(queryString, variables as any);
   };
 };
